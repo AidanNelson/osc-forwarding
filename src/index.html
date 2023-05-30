@@ -2,11 +2,70 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
+    <title>OSC Forwarder </title>
     <link rel="stylesheet" href="index.css" />
+    <script src="./socket.io.min.js"></script>
+
+    <style>
+      html,
+      body {
+        background-color: lightblue;
+      }
+
+      #centerContainer {
+        margin: auto;
+        width: 500px;
+        margin-top: 2em;
+      }
+      #connect {
+        margin-left: 180px;
+        margin-top: 20px;
+        padding: 1em;
+        font-weight: bold;
+        width: 100px;
+      }
+    </style>
   </head>
   <body>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
+    
+    <div id="centerContainer">
+
+    <h1>OSC Forwarder</h1>
+    <p>
+      This app will connect to a socket.io server (at the address you input below), listen for socket messages with the title 'osc', and rebroadcast them to an OSC server on the local network as osc messages.  It will also create an osc server on the local network, and forward OSC messages received by that server to the socket server.
+    </p>
+
+    <form>
+      <fieldset>
+      <fieldset>
+        <legend>Socket Server</legend>
+        <label for="socket-server-input" >Socket Server URL:</label>
+        <input type="text" id="socket-server-url-input" value="https://mySocketServer.com">
+      </fieldset>
+      <fieldset>
+        <legend>OSC Receiver on Local Network (i.e. QLab, etc.)</legend>
+        <label for="osc-server-ip-input">OSC Server IP (on local network):</label>
+        <input id="osc-server-ip-input" value="127.0.0.1"></input>
+        <br />
+        <label for="osc-server-port-input">OSC Server Port (on local network):</label>
+        <input id="osc-server-port-input" value="53000"></input>
+      </fieldset>
+      <fieldset>
+        <legend>OSC Server (this app)</legend>
+        <label for="osc-forwarder-ip-input">OSC Server IP:</label>
+        <input id="osc-forwarder-ip-input" value="127.0.0.1"></input>
+        <br />
+        <label for="osc-forwarder-port-input">OSC Server Port:</label>
+        <input id="osc-forwarder-port-input" value="3333"></input>
+      </fieldset>
+        <button id="connect">Connect</button>
+ 
+
+    </fieldset>
+  </form>
+  </div>
+
+  <script src="./forwarder.js" type="module"></script>
+    
   </body>
 </html>
